@@ -35,10 +35,9 @@ def register_page():
             f"Accont created for user {user_to_create.username} and Successfully logged in", category='success')
         return redirect(url_for('market_page'))
     if form.errors != {}:
-        for error_msg in form.errors.values():
-            print(form.errors.__dict__)
+        for fieldName, error_msg in form.errors.items():
             flash(
-                f'There was an error in creating user {error_msg}', category='danger')
+                f'There was an error in creating user in field - {form[fieldName].label.text} {error_msg}', category='danger')
     return render_template('register.html', form=form)
 
 

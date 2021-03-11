@@ -164,3 +164,4 @@ dmypy.json
 
 # End of https://www.toptal.com/developers/gitignore/api/flask,vscode,database
 .vscode/settings.json
+close_port.py
