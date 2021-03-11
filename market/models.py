@@ -29,7 +29,7 @@ class User(db.Model, UserMixin):
             plain_text_password).decode('utf-8')
 
     def check_password_correction(self, attempted_password):
-        return str(self.password_hash) == attempted_password
+        return bcrypt.check_password_hash(str(self.password_hash), attempted_password)
 
     @property
     def prettier_budget(self):
