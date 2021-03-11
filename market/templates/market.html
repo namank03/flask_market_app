@@ -4,31 +4,43 @@ Market Page
 {% endblock %}
 
 {% block content %}
-<table class="table table-hover table-dark">
-    <thead>
-        <tr>
-            <!-- Your Columns HERE -->
-            <th scope="col">ID</th>
-            <th scope="col">Name</th>
-            <th scope="col">Barcode</th>
-            <th scope="col">Price</th>
-            <th scope="col">Options</th>
-        </tr>
-    </thead>
-    <tbody>
-        <!-- Your rows inside the table HERE: -->
-        {% for item in items %}
-        <tr>
-            <td>{{ item.id }}</td>
-            <td>{{ item.name }}</td>
-            <td>{{ item.barcode }}</td>
-            <td>{{ item.price }}$</td>
-            <td>
-                <button class="btn btn-outline btn-info">More Info</button>
-                <button class="btn btn-outline btn-success">Purchase this Item</button>
-            </td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
+
+<div class="mr-4 mt-2 ml-4 mb-2">
+    <table class="table table-hover table-dark">
+        <thead>
+            <tr>
+                <!-- Your Columns HERE -->
+                <th scope="col">ID</th>
+                <th scope="col">Name</th>
+                <th scope="col">Barcode</th>
+                <th scope="col">Price</th>
+                <th scope="col">Options</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Your rows inside the table HERE: -->
+            {% for item in items %}
+            <tr>
+                <td>{{ item.id }}</td>
+                <td>{{ item.name }}</td>
+                <td>{{ item.barcode }}</td>
+                <td>{{ item.price }}$</td>
+                <td>
+                    <button class="btn btn-outline btn-info">More Info</button>
+                    <button class="btn btn-outline btn-success">Purchase this Item</button>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+<br>
+
+<body class="text-center">
+    <div class="container">
+        <div class="checkbox mb-3">
+            <a class="btn btn-lg btn-secondary" href="{{ url_for('additem_page') }}"> Add Item </a>
+        </div>
+    </div>
+</body>
 {% endblock %}

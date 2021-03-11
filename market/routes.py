@@ -1,9 +1,9 @@
 from flask import flash, redirect, render_template, url_for
 
 from market import app, db
-from market.forms import LoginForm, RegisterForm
+from market.forms import AddItemForm, LoginForm, RegisterForm
 from market.models import Item, User
-from flask_login import login_user, logout_user, login_required
+from flask_login import login_user, logout_user, login_required, current_user
 
 
 @app.route('/')
@@ -35,8 +35,9 @@ def register_page():
         return redirect(url_for('market_page'))
     if form.errors != {}:
         for error_msg in form.errors.values():
+            print(form.errors.__dict__)
             flash(
-                f'there was an error in creating user {error_msg}', category='danger')
+                f'There was an error in creating user {error_msg}', category='danger')
     return render_template('register.html', form=form)
 
 
@@ -66,3 +67,23 @@ def logout_page():
     logout_user()
     flash("Successfully logged out", category='info')
     return redirect(url_for('home_page'))
+
+
+@app.route('/additem', methods=['POST', 'GET'])
+def additem_page():
+    form = AddItemForm()
+    if form.validate_on_submit():
+        item_to_create = Item(name=form.item_name.data,
+                              price=form.price.data,
+                              barcode=form.barcode.data,
+                              description=form.description.data)
+        item_to_create.owner = current_user.id
+        db.session.add(item_to_create)
+        db.session.commit()
+        return redirect(url_for('market_page'))
+    if form.errors != {}:
+        for fieldName, error_msg in form.errors.items():
+            flash(
+                f'There was an error in creating Item error in field - {form[fieldName].label.text} {error_msg}',
+                category='danger')
+    return render_template('add_item.html', form=form)

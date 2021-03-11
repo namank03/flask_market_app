@@ -1,7 +1,7 @@
 from flask_wtf import FlaskForm
-from wtforms import PasswordField, StringField, SubmitField
+from wtforms import PasswordField, StringField, SubmitField, IntegerField
 from wtforms.validators import DataRequired, Email, EqualTo, Length, ValidationError
-from market.models import User
+from market.models import User, Item
 
 
 class RegisterForm(FlaskForm):
@@ -36,3 +36,22 @@ class LoginForm(FlaskForm):
         DataRequired()])
 
     submit = SubmitField(label="Sign In")
+
+
+class AddItemForm(FlaskForm):
+
+    def validate_item_name(self, item_name_to_check):
+        item = Item.query.filter_by(name=item_name_to_check.data).first()
+        if item:
+            raise ValidationError(
+                'This Item already exists in the database, Please try another one!')
+
+    item_name = StringField(label="Item Name:", validators=[
+        Length(min=6, max=30), DataRequired()])
+    price = IntegerField(label="Price:", validators=[DataRequired()])
+    barcode = StringField(label="Bar Code", validators=[
+                          Length(min=12, max=12), DataRequired()])
+    description = StringField(label="Description", validators=[
+                              DataRequired(), Length(min=4, max=1024)])
+
+    submit = SubmitField(label="Add Item")
