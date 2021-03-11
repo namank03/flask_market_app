@@ -15,7 +15,7 @@ app.config['SECRET_KEY'] = 'ff749f4574abef07a564b2d1'
 
 
 db = SQLAlchemy(app)
-toolbar = DebugToolbarExtension(app)
+# toolbar = DebugToolbarExtension(app)
 bcrypt = Bcrypt(app)
 login_manager = LoginManager(app)
 login_manager.login_view = 'login_page'
