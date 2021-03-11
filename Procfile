@@ -1,1 +1,1 @@
-web gunicorn --pythonpath src app:run
+web gunicorn --pythonpath src app:app --log-level debug --log-file=-
