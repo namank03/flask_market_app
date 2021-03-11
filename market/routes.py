@@ -28,6 +28,10 @@ def register_page():
                               password=form.password1.data)
         db.session.add(user_to_create)
         db.session.commit()
+
+        login_user(user_to_create)
+        flash(
+            f"Accont created for user {user_to_create.username} and Successfully logged in", category='success')
         return redirect(url_for('market_page'))
     if form.errors != {}:
         for error_msg in form.errors.values():
