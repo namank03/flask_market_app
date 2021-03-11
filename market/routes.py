@@ -3,7 +3,7 @@ from flask import flash, redirect, render_template, url_for
 from market import app, db
 from market.forms import LoginForm, RegisterForm
 from market.models import Item, User
-from flask_login import login_user, logout_user
+from flask_login import login_user, logout_user, login_required
 
 
 @app.route('/')
@@ -13,6 +13,7 @@ def home_page():
 
 
 @app.route('/market')
+@login_required
 def market_page():
     items = Item.query.all()
     return render_template('market.html', items=items)
