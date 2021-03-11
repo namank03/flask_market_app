@@ -16,7 +16,8 @@ def home_page():
 @login_required
 def market_page():
     items = Item.query.all()
-    return render_template('market.html', items=items)
+    items_owned_by_user = Item.query.filter_by(owner=current_user.id)
+    return render_template('market.html', items=items, items_owned_by_user=items_owned_by_user)
 
 
 @app.route('/register', methods=['POST', 'GET'])
