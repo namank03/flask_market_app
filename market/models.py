@@ -1,5 +1,7 @@
 from market import bcrypt, db, login_manager
 from flask_login import UserMixin
+import locale
+locale.setlocale(locale.LC_ALL, '')
 
 
 @login_manager.user_loader
@@ -28,6 +30,10 @@ class User(db.Model, UserMixin):
 
     def check_password_correction(self, attempted_password):
         return str(self.password_hash) == attempted_password
+
+    @property
+    def prettier_budget(self):
+        return locale.currency(self.budget, grouping=True)
 
 
 class Item(db.Model):
