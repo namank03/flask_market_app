@@ -1,4 +1,4 @@
-from market import db
+from market import bcrypt, db
 
 
 class User(db.Model):
@@ -10,6 +10,15 @@ class User(db.Model):
     budget = db.Column(db.Integer(), nullable=False, default=1000)
     # make relationship this shows our user can hold some items. Lazy = True will grab all items.
     items = db.relationship('Item', backref='owned_user', lazy=True)
+
+    @property
+    def password(self):
+        return self.password
+
+    @password.setter
+    def password(self, plain_text_password):
+        self.password_hash = bcrypt.generate_password_hash(
+            plain_text_password).decode('utf-8')
 
 
 class Item(db.Model):
