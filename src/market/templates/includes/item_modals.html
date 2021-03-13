@@ -77,13 +77,13 @@
             </div>
             <div class="modal-body">
                 <form method="POST">
-                    {{ purchase_form.hidden_tag() }}
+                    {{ sell_form.hidden_tag() }}
                     <h6>
                         Are you sure you want to sell {{ item.name }} for {{ item.price }}$ ?
                     </h6>
 
                     <input id="sell_item_name" name="sell_item_name" type="hidden" value="{{ item.name }}">
-                    {{ purchase_form.submit(class="btn btn-outline-success btn-block") }}
+                    {{ sell_form.submit(class="btn btn-outline-success btn-block") }}
                 </form>
             </div>
             <div class="modal-footer">
