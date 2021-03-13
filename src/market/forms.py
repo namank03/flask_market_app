@@ -55,3 +55,11 @@ class AddItemForm(FlaskForm):
                               DataRequired(), Length(min=4, max=1024)])
 
     submit = SubmitField(label="Add Item")
+
+
+class PurchaseItemForm(FlaskForm):
+    submit = SubmitField(label="Purchase Item")
+
+
+class SellItemForm(FlaskForm):
+    submit = SubmitField(label="Sell Item")

@@ -44,7 +44,14 @@
                 </button>
             </div>
             <div class="modal-body">
-                Are you sure you want to buy {{ item.name }} for {{ item.price }}$ ?
+                <form method="POST">
+                    {{ purchase_form.hidden_tag() }}
+                    <h6>
+                        Are you sure you want to buy {{ item.name }} for {{ item.price }}$ ?
+                    </h6>
+                    <input id="purchase_item_name" name="purchase_item_name" type="hidden" value="{{ item.name }}">
+                    {{ purchase_form.submit(class="btn btn-outline-success btn-block") }}
+                </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close
@@ -69,7 +76,15 @@
                 </button>
             </div>
             <div class="modal-body">
-                Are you sure you want to sell {{ item.name }} for {{ item.price }}$ ?
+                <form method="POST">
+                    {{ purchase_form.hidden_tag() }}
+                    <h6>
+                        Are you sure you want to sell {{ item.name }} for {{ item.price }}$ ?
+                    </h6>
+
+                    <input id="sell_item_name" name="sell_item_name" type="hidden" value="{{ item.name }}">
+                    {{ purchase_form.submit(class="btn btn-outline-success btn-block") }}
+                </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close

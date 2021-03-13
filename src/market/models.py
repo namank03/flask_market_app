@@ -19,6 +19,9 @@ class User(db.Model, UserMixin):
     # make relationship this shows our user can hold some items. Lazy = True will grab all items.
     items = db.relationship('Item', backref='owned_user', lazy=True)
 
+    def __repr__(self):
+        return f"user = {self.username}"
+
     @property
     def password(self):
         return self.password
